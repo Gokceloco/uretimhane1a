@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public bool isAppleCollected;
     public float speed;
+
+    private Rigidbody _rb;
+
+    private void Start()
+    {
+        _rb = GetComponent<Rigidbody>();
+    }
+
     private void Update()
     {
         var direction = Vector3.zero;
@@ -25,7 +34,7 @@ public class Player : MonoBehaviour
         {
             direction += Vector3.left;
         }
-        transform.position += direction.normalized * speed * Time.deltaTime;
+        _rb.position += direction.normalized * speed * Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -38,6 +47,7 @@ public class Player : MonoBehaviour
         {
             var apple = other.gameObject;
             apple.SetActive(false);
+            isAppleCollected = true;
         }
     }
 }
