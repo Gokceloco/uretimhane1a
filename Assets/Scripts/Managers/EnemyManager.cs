@@ -36,4 +36,16 @@ public class EnemyManager : MonoBehaviour
         }
         enemies.Clear();
     }
+
+    public void GenerateEnemiesForTrigger(Vector3 position)
+    {
+        for (int i = 0; i < enemyCount; i++)
+        {
+            var newEnemy = Instantiate(enemyPrefab);
+            newEnemy.transform.position = new Vector3(Random.Range(-2.8f, 2.8f),
+                0, position.z + 1 + i);
+            newEnemy.StartEnemy(gameDirector.player);
+            enemies.Add(newEnemy);
+        }
+    }
 }

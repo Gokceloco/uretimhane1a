@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
 
     private Rigidbody _rb;
 
+    public Transform cameraHolder;
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -37,6 +39,10 @@ public class Player : MonoBehaviour
             direction += Vector3.left;
         }
         _rb.position += direction.normalized * speed * Time.deltaTime;
+
+        var pos = transform.position;
+        pos.x = 0;
+        cameraHolder.position = pos;
     }
 
     private void OnTriggerEnter(Collider other)
